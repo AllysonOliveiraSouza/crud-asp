@@ -1,0 +1,51 @@
+﻿@model List<ContatoModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Página de contatos !</h1>
+    <br />
+    <br />
+    <a asp-controller="Contato" asp-action="CriarContato"><button type="button" class="btn btn-success btn-lg">Adicionar novo contato</button></a>
+
+
+</div>
+
+<br />
+<br />
+
+<table class="table table-dark table-striped">
+    <thead>
+        <tr>
+            <th scope="col">N° Cadastro</th>
+            <th scope="col">Nome</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Celular</th>
+            <th scope="col"> </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if(Model!=null && Model.Any())
+        {
+            foreach (ContatoModel cm in Model)
+            {
+                <tr>
+                    <th scope="row">@cm.Id</th>
+                    <td>@cm.Nome</td>
+                    <td>@cm.Email</td>
+                    <td>@cm.Celular</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a asp-controller="Contato" asp-action="AlterarContato" asp-route-id="@cm.Id"><button type="button" class="btn btn-primary">Editar</button></a>
+                            <a asp-controller="Contato" asp-action="ExcluirContato" asp-route-id="@cm.Id"><button type="button" class="btn btn-danger">Apagar</button></a>
+                        </div>
+                    </td>
+                </tr>
+                
+            }   
+        }
+    </tbody>
+</table>
